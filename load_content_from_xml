@@ -1,0 +1,23 @@
+<?php
+	// just dump the contents
+	// echo file_get_contents("https://www.jobs.nhs.uk/search_xml?client_id=120650");
+?>
+
+<?php
+	$feed = file_get_contents('https://www.jobs.nhs.uk/search_xml?client_id=120650'); //the xml feed
+	$xml = simplexml_load_string($feed);
+	
+	$items = $xml->vacancy_details;
+
+	foreach ($items as $item) {
+		
+		$id = $item->id;
+		$job_title = $item->job_title;
+		
+		echo '<div style="border-bottom:1px solid #ccc;">';
+			echo '<strong>'. $job_title .'</strong><br />';
+			echo $id;
+		echo '</div>';
+		
+	}
+?>
